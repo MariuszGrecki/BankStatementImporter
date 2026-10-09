@@ -1,0 +1,14 @@
+{
+  "identities": [
+    {
+      "name": "bank-dev",
+      "credentials": [
+        {
+          "accessKey": "bank-dev-key",
+          "secretKey": "bank-dev-secret"
+        }
+      ],
+      "actions": ["Admin", "Read", "List", "Tagging", "Write"]
+    }
+  ]
+}

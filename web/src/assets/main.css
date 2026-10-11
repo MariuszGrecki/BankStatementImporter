@@ -12,3 +12,38 @@ body {
   margin: 0 auto;
   padding: 1rem;
 }
+
+header nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav-user {
+  margin-left: auto;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 360px;
+}
+
+.auth-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.auth-form input,
+.auth-form button {
+  font: inherit;
+  padding: 0.5rem;
+}
+
+.field-error,
+.form-error {
+  margin: 0;
+  color: light-dark(#b00020, #ff8a80);
+}

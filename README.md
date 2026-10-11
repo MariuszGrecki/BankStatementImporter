@@ -26,4 +26,16 @@ docker compose exec web npm run type-check
 docker compose exec web npx vitest run
 ```
 
+Automatyczna poprawa stylu (zapisuje zmiany w plikach):
+
+```sh
+docker compose exec api ./vendor/bin/pint
+docker compose exec web npm run format
+```
+
+## Komendy
+```sh
+docker compose exec api php artisan make:migration create..
+```
+
 

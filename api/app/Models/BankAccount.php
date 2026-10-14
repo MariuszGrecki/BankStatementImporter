@@ -9,10 +9,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 #[Fillable(['name'])]
-
 class BankAccount extends Model
 {
-    /** @use HasFactory<\Database\Factories\CategoryRuleFactory> */
+    /** @use HasFactory<\Database\Factories\BankAccountFactory> */
     use HasFactory;
 
     public function user(): BelongsTo

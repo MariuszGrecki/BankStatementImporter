@@ -26,9 +26,9 @@ class Transaction extends Model
         ];
     }
 
-    public function user(): BelongsTo
+    public function bankAccount(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(BankAccount::class);
     }
 
     public function import(): BelongsTo

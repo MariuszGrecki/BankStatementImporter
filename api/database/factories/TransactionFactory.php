@@ -2,9 +2,11 @@
 
 namespace Database\Factories;
 
+use App\Casts\MoneyCast;
 use App\Models\Category;
 use App\Models\Import;
 use App\Models\Transaction;
+use Brick\Money\Money;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -24,7 +26,7 @@ class TransactionFactory extends Factory
             'bank_account_id' => fn (array $attributes) => Import::query()->findOrFail((int) $attributes['import_id'])->bank_account_id,
             'category_id' => null,
             'booked_on' => fake()->dateTimeBetween('-1 year'),
-            'amount_minor' => fake()->randomElement([-1, 1]) * fake()->numberBetween(100, 500_000),
+            'amount' => Money::ofMinor(fake()->randomElement([-1, 1]) * fake()->numberBetween(100, 500_000), MoneyCast::CURRENCY),
             'description' => fake()->randomElement(['Zakupy spożywcze', 'Opłata za prąd', 'Przelew własny', 'Paliwo', 'Subskrypcja', 'Zwrot za zakupy']),
             'counterparty' => fake()->optional(0.8)->company(),
         ];
@@ -33,14 +35,14 @@ class TransactionFactory extends Factory
     public function expense(): static
     {
         return $this->state(fn (array $attributes) => [
-            'amount_minor' => -abs($attributes['amount_minor']),
+            'amount' => $attributes['amount']->abs()->negated(),
         ]);
     }
 
     public function income(): static
     {
         return $this->state(fn (array $attributes) => [
-            'amount_minor' => abs($attributes['amount_minor']),
+            'amount' => $attributes['amount']->abs(),
         ]);
     }
 

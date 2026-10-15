@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Casts\MoneyCast;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-#[Fillable(['booked_on', 'amount_minor', 'description', 'counterparty'])]
+#[Fillable(['booked_on', 'amount', 'description', 'counterparty'])]
 
 class Transaction extends Model
 {
@@ -23,6 +24,7 @@ class Transaction extends Model
     {
         return [
             'booked_on' => 'date',
+            'amount' => MoneyCast::class,
         ];
     }
 

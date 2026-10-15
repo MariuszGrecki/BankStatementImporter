@@ -6,6 +6,7 @@ use App\Models\CategoryRule;
 use App\Models\Import;
 use App\Models\Transaction;
 use App\Models\User;
+use Brick\Money\Money;
 
 function seedGraph(): array
 {
@@ -81,3 +82,23 @@ it('deletes the imports and transactions of a deleted bank account', function ()
         ->and(Transaction::count())->toBe(0)
         ->and(User::count())->toBe(1);
 });
+
+it('stores the amount without losing precision', function () {
+    $transaction = Transaction::factory()->create(['amount' => Money::of('1234.56', 'PLN')]);
+
+    expect((string) $transaction->fresh()->amount->getAmount())->toBe('1234.56');
+});
+
+it('serializes the amount as a decimal string', function () {
+    $transaction = Transaction::factory()->create(['amount' => Money::of('-12.50', 'PLN')]);
+
+    expect($transaction->fresh()->toArray()['amount'])->toBe('-12.50');
+});
+
+it('rejects an amount that is not a Money object', function () {
+    Transaction::factory()->create(['amount' => 12.34]);
+})->throws(InvalidArgumentException::class);
+
+it('rejects an amount in another currency', function () {
+    Transaction::factory()->create(['amount' => Money::of('10', 'EUR')]);
+})->throws(InvalidArgumentException::class);

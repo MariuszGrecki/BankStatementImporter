@@ -36,6 +36,10 @@ docker compose exec web npm run format
 ## Komendy
 ```sh
 docker compose exec api php artisan make:migration create..
+docker compose exec api php artisan make:controller BankAccountController --api
+docker compose exec api php artisan make:request BankAccountRequest
+docker compose exec api php artisan make:resource BankAccountResource
+docker compose exec api php artisan make:policy BankAccountPolicy --model=BankAccount
 ```
 
 

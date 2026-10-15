@@ -27,7 +27,7 @@ return new class extends Migration
                 ->constrained()
                 ->nullOnDelete();
             $table->date('booked_on');
-            $table->bigInteger('amount_minor');
+            $table->decimal('amount', 12, 2);
             $table->text('description');
             $table->string('counterparty', 255)->nullable();
             $table->timestamps();

@@ -16,7 +16,9 @@ class BankAccountController extends Controller
      */
     public function index(Request $request) : AnonymousResourceCollection
     {
-        return BankAccountResource::collection($request->user()->categories()->orderBy('name')->get());
+        Gate::authorize('viewAny', BankAccount::class);
+
+        return BankAccountResource::collection($request->user()->bankAccounts()->orderBy('name')->get());
     }
 
     /**

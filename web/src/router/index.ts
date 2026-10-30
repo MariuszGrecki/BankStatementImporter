@@ -44,6 +44,12 @@ export const routes: RouteRecordRaw[] = [
     name: 'not-found',
     component: () => import('../views/NotFoundView.vue'),
   },
+  {
+    path: '/konta',
+    name: 'bank-accounts',
+    component: () => import('../views/BankAccountsView.vue'),
+    meta: { requiresAuth: true },
+  },
 ]
 
 export function authGuard(to: RouteLocationNormalized): RouteLocationRaw | undefined {

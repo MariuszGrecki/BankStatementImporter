@@ -19,6 +19,7 @@ async function logout() {
 
       <template v-if="auth.isAuthenticated">
         <RouterLink :to="{ name: 'dashboard' }">Panel</RouterLink>
+        <RouterLink :to="{ name: 'bank-accounts'}">Konta</RouterLink>
         <span class="nav-user">{{ auth.user?.name }}</span>
         <button type="button" @click="logout">Wyloguj</button>
       </template>
